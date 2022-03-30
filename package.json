@@ -9,6 +9,12 @@
     "prepare": "husky install",
     "lint": "eslint src --fix --ext .js,.ts,.jsx,.tsx,.vue && prettier --write --ignore-unknown"
   },
+  "lint-staged": {
+    "*.{vue,js,ts,tsx,jsx}": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ]
+  },
   "dependencies": {
     "vue": "^3.2.25"
   },
