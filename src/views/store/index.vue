@@ -8,7 +8,7 @@
     <el-button type="primary" @click="countStore.countAdd"> -1 </el-button>
   </div>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" name="store">
 import { computed } from 'vue';
 import { useCountStore } from '@/store';
 import { storeToRefs } from 'pinia';

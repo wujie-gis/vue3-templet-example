@@ -342,7 +342,7 @@
     "@vue/compiler-core" "3.2.31"
     "@vue/shared" "3.2.31"
 
-"@vue/compiler-sfc@3.2.31":
+"@vue/compiler-sfc@^3.2.29", "@vue/compiler-sfc@3.2.31":
   "integrity" "sha512-748adc9msSPGzXgibHiO6T7RWgfnDcVQD+VVwYgSsyyY8Ans64tALHZANrKtOzvkwznV/F4H7OAod/jIlp/dkQ=="
   "resolved" "https://registry.npmjs.org/@vue/compiler-sfc/-/compiler-sfc-3.2.31.tgz"
   "version" "3.2.31"
@@ -2444,7 +2444,15 @@
   "resolved" "https://registry.npmjs.org/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz"
   "version" "2.3.0"
 
-"vite@^2.3.0", "vite@^2.5.10", "vite@^2.8.0":
+"vite-plugin-vue-setup-extend@^0.4.0":
+  "integrity" "sha512-WMbjPCui75fboFoUTHhdbXzu4Y/bJMv5N9QT9a7do3wNMNHHqrk+Tn2jrSJU0LS5fGl/EG+FEDBYVUeWIkDqXQ=="
+  "resolved" "https://registry.npmjs.org/vite-plugin-vue-setup-extend/-/vite-plugin-vue-setup-extend-0.4.0.tgz"
+  "version" "0.4.0"
+  dependencies:
+    "@vue/compiler-sfc" "^3.2.29"
+    "magic-string" "^0.25.7"
+
+"vite@^2.3.0", "vite@^2.5.10", "vite@^2.8.0", "vite@>=2.0.0":
   "integrity" "sha512-e4H0QpludOVKkmOsRyqQ7LTcMUDF3mcgyNU4lmi0B5JUbe0ZxeBBl8VoZ8Y6Rfn9eFKYtdXNPcYK97ZwH+K2ug=="
   "resolved" "https://registry.npmjs.org/vite/-/vite-2.8.6.tgz"
   "version" "2.8.6"
