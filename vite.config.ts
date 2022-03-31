@@ -38,8 +38,25 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         resolvers: [ElementPlusResolver()],
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: 'sass',
+          }),
+        ],
       }),
     ],
+    css: {
+      preprocessorOptions: {
+        css: {
+          charset: false,
+        },
+        scss: {
+          charset: false,
+          additionalData: `@use "@/styles/element/index.scss" as *;
+           @use "@/styles/global.scss" as *;
+          `,
+        },
+      },
+    },
   };
 });
