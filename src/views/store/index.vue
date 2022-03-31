@@ -4,12 +4,8 @@
     <br />
     <span>双倍数值{{ doubleCount }}</span>
     <br />
-    <el-button type="primary" size="default" @click="countStore.countAdd">
-      +1
-    </el-button>
-    <el-button type="primary" size="default" @click="countStore.countAdd">
-      -1
-    </el-button>
+    <el-button @click="countStore.countAdd"> +1 </el-button>
+    <el-button type="primary" @click="countStore.countAdd"> -1 </el-button>
   </div>
 </template>
 <script setup lang="ts">

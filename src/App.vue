@@ -46,7 +46,7 @@ const get = async () => {
   console.log(res.result.dayList);
 };
 onMounted(() => {
-  get();
+  // get();
 });
 </script>
 
