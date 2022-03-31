@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import './index.css';
+import '@/styles/index.scss';
 // 引入 vue-router
 import router from './router';
 // 引入 pinia

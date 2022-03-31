@@ -1,6 +1,28 @@
 @import './mixin.scss';
 @import './base.scss';
 
+.icon-box {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  .label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(#232b28, 0.9);
+    padding: 2px;
+    .label-item {
+      margin-left: 2px;
+    }
+  }
+  .icon {
+    margin-top: 3px;
+  }
+}
+
 #app {
   height: 100%;
   width: 100%;

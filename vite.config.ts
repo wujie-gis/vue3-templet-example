@@ -58,5 +58,20 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         },
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('styles/main.css')) {
+              return 'tailwindcss';
+            }
+            if (id.includes('element-plus/theme-chalk/')) {
+              // 当然也可以优化下这个判断，不过目前这样写足矣了。
+              return 'element-plus';
+            }
+          },
+        },
+      },
+    },
   };
 });
