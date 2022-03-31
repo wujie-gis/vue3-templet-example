@@ -11,6 +11,7 @@ import VueSetupExtend from 'vite-plugin-vue-setup-extend';
 export default defineConfig(({ mode }: ConfigEnv) => {
   const env = loadEnv(mode, process.cwd());
   return {
+    base: process.env.NODE_ENV === 'production' ? './' : '/',
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
@@ -23,10 +24,10 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         '/api': {
           target: env.VITE_APP_API_BASE_URL,
           changeOrigin: true,
-          configure: (proxy, options) => {
-            // proxy 是 'http-proxy' 的实例
-            console.log(proxy, options);
-          },
+          // configure: (proxy, options) => {
+          //   // proxy 是 'http-proxy' 的实例
+          //   console.log(proxy, options);
+          // },
           rewrite: path => path.replace(/^\/api/, ''),
         },
       },
@@ -59,6 +60,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       },
     },
     build: {
+      outDir: 'dist/pro',
       rollupOptions: {
         output: {
           manualChunks(id) {

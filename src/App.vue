@@ -5,6 +5,7 @@
     >取消请求</el-button
   >
   <el-button @click="cancelAllRequest">取消全部请求</el-button>
+  <span class="text-red-600">阿克苏骄傲</span>
   <router-view></router-view>
 </template>
 
