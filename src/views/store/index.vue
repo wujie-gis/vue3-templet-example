@@ -6,6 +6,14 @@
     <br />
     <el-button @click="countStore.countAdd"> +1 </el-button>
     <el-button type="primary" @click="countStore.countAdd"> -1 </el-button>
+    <div class="...">
+      <div class="flow-root ...">
+        <div class="my-4 ...">1</div>
+      </div>
+      <div class="flow-root ...">
+        <div class="my-4 ...">2</div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts" name="store">
