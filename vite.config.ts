@@ -1,11 +1,14 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
 import { resolve } from 'path';
 import type { ConfigEnv } from 'vite';
-import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import VueSetupExtend from 'vite-plugin-vue-setup-extend';
+import cesium from 'vite-plugin-mars3d';
+import OptimizationPersist from 'vite-plugin-optimize-persist';
+import PkgConfig from 'vite-plugin-package-config';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv) => {
@@ -22,7 +25,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
       proxy: {
         // 使用 proxy 实例
         '/api': {
-          target: env.VITE_APP_API_BASE_URL,
+          target: env.VITE_BASE_URL,
           changeOrigin: true,
           // configure: (proxy, options) => {
           //   // proxy 是 'http-proxy' 的实例
@@ -34,16 +37,13 @@ export default defineConfig(({ mode }: ConfigEnv) => {
     },
     plugins: [
       vue(),
+      AutoImport(),
+      cesium(),
+      PkgConfig(),
+      OptimizationPersist(),
       VueSetupExtend(),
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-      }),
       Components({
-        resolvers: [
-          ElementPlusResolver({
-            importStyle: 'sass',
-          }),
-        ],
+        resolvers: [NaiveUiResolver()],
       }),
     ],
     css: {
@@ -53,27 +53,31 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         },
         scss: {
           charset: false,
-          additionalData: `@use "@/styles/element/index.scss" as *;
-           @use "@/styles/global.scss" as *;
-          `,
         },
       },
     },
     build: {
-      outDir: 'dist/pro',
+      outDir: 'dist/emergency-fuling',
+      chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
           manualChunks(id) {
             if (id.includes('styles/main.css')) {
-              return 'tailwindcss';
+              return 'tailwind';
             }
-            if (id.includes('element-plus/theme-chalk/')) {
-              // 当然也可以优化下这个判断，不过目前这样写足矣了。
-              return 'element-plus';
+            if (id.includes('bitmap3d')) {
+              return 'bitmap3d';
             }
+            // if (id.includes('naive-ui')) {
+            //   return 'naive-ui';
+            // }
           },
+          entryFileNames: 'js/[name].[hash].js', // 用于从入口点创建的块的打包输出格式[name]表示文件名,[hash]表示该文件内容hash值
+          chunkFileNames: 'js/[name].[hash].js', // 用于命名代码拆分时创建的共享块的输出命名
+          assetFileNames: '[ext]/[name].[hash].[ext]', // 用于输出静态资源的命名，[ext]表示文件扩展名
         },
       },
+      target: 'esnext',
     },
   };
 });

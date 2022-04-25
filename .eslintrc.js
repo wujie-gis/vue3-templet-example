@@ -67,12 +67,14 @@ module.exports = defineConfig({
     'vue/html-indent': 'off',
     // 关闭此规则 使用 prettier 的格式化规则，
     'vue/max-attributes-per-line': ['off'],
-    // 优先使用驼峰，element 组件除外
+    // 关闭组件命名检测
+    'vue/multi-word-component-names': 'off',
+    // 优先使用驼峰，naive-ui 组件除外
     'vue/component-name-in-template-casing': [
       'error',
       'PascalCase',
       {
-        ignores: ['/^el-/', '/^router-/'],
+        ignores: ['/^n-/', '/^router-/'],
         registeredComponentsOnly: false,
       },
     ],

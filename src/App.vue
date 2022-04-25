@@ -1,63 +1,19 @@
 <template>
-  <el-button @click="get">请求</el-button>
-  <el-button
-    @click="cancelRequest('/api/common/weather/get15DaysWeatherByArea')"
-    >取消请求</el-button
+  <n-config-provider
+    :theme="null"
+    :theme-overrides="themeOverrides"
+    :locale="zhCN"
+    :date-locale="dateZhCN"
+    class="h-screen"
   >
-  <el-button @click="cancelAllRequest">取消全部请求</el-button>
-  <span class="text-red-600">阿克苏骄傲</span>
-  <router-view></router-view>
+    <router-view></router-view>
+    <n-global-style />
+  </n-config-provider>
 </template>
 
 <script setup lang="ts">
-import request, { cancelRequest, cancelAllRequest } from './service';
-import { onMounted } from 'vue';
-
-interface Req {
-  apiKey: string;
-  area?: string;
-  areaID?: string;
-}
-interface Res {
-  area: string;
-  areaCode: string;
-  areaid: string;
-  dayList: any[];
-}
-const get15DaysWeatherByArea = (data: Req) => {
-  return request<Req, Res>({
-    url: '/api/common/weather/get15DaysWeatherByArea',
-    method: 'GET',
-    data,
-    interceptors: {
-      requestInterceptors(res) {
-        return res;
-      },
-      responseInterceptors(result) {
-        return result;
-      },
-    },
-  });
-};
-const get = async () => {
-  const res = await get15DaysWeatherByArea({
-    apiKey: import.meta.env.VITE_APP_KEY,
-    area: '北京市',
-  });
-  console.log(res.result.dayList);
-};
-onMounted(() => {
-  // get();
-});
+import { NConfigProvider, zhCN, dateZhCN } from 'naive-ui';
+import themeOverrides from '@/styles/theme';
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
